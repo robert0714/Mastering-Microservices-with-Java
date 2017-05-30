@@ -19,7 +19,7 @@ public class InMemRestaurantRepository implements RestaurantRepository<Restauran
      * Initialize the in-memory Restaurant Repository with empty Map
      */
     public InMemRestaurantRepository() {
-        entities = new HashMap();
+        entities = new HashMap<String, Restaurant>();
     }
 
     /**
