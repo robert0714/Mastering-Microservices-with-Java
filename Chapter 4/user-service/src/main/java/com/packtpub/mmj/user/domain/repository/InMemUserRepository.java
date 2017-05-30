@@ -112,7 +112,7 @@ public class InMemUserRepository implements UserRepository<User, String> {
      */
     @Override
     public Collection<User> findByName(String name) throws Exception {
-        Collection<User> users = new ArrayList();
+        Collection<User> users = new ArrayList<User>();
         int noOfChars = name.length();
         entities.forEach((k, v) -> {
             if (v.getName().toLowerCase().contains(name.toLowerCase().subSequence(0, noOfChars))) {

@@ -114,7 +114,7 @@ public class InMemBookingRepository implements BookingRepository<Booking, String
      */
     @Override
     public Collection<Booking> findByName(String name) throws Exception {
-        Collection<Booking> bookings = new ArrayList();
+        Collection<Booking> bookings = new ArrayList<Booking>();
         int noOfChars = name.length();
         entities.forEach((k, v) -> {
             if (v.getName().toLowerCase().contains(name.toLowerCase().subSequence(0, noOfChars))) {

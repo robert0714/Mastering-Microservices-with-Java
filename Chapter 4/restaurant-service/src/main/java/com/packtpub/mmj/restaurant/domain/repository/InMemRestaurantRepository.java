@@ -128,7 +128,7 @@ public class InMemRestaurantRepository implements RestaurantRepository<Restauran
      */
     @Override
     public Collection<Restaurant> findByName(String name) throws Exception {
-        Collection<Restaurant> restaurants = new ArrayList();
+        Collection<Restaurant> restaurants = new ArrayList<Restaurant>();
         int noOfChars = name.length();
         entities.forEach((k, v) -> {
             if (v.getName().toLowerCase().contains(name.subSequence(0, noOfChars))) {
