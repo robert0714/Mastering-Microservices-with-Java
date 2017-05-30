@@ -75,7 +75,10 @@ class DiscoveryClientSample implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
+    	//print the Discovery Client Description
         System.out.println(discoveryClient.description());
+        
+        //Get restaurant-service instances and prints its info
         discoveryClient.getInstances("restaurant-service").forEach((ServiceInstance serviceInstance) -> {
             System.out.println("Instance --> " + serviceInstance.getServiceId()
                     + "\nServer: " + serviceInstance.getHost() + ":" + serviceInstance.getPort()

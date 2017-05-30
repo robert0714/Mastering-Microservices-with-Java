@@ -37,7 +37,7 @@
             <plugin>
                 <groupId>org.jolokia</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.13.7</version>
+                <version>0.13.9</version>
                 <configuration>
                     <images>
                         <image>
@@ -64,11 +64,13 @@
                                 <ports>
                                     <port>${docker.port}:8080</port>
                                 </ports>
-                                <volumes>
-                                    <bind>
-                                        <volume>${user.home}/logs:/logs</volume>
-                                    </bind>
-                                </volumes>
+                               <!-- ${user.home}/logs 如果不存在，會造成mvn docker:start 無法執行docker run
+                                -->
+<!--                                 <volumes> -->
+<!--                                     <bind> -->
+<!--                                         <volume>${user.home}/logs:/logs</volume> -->
+<!--                                     </bind> -->
+<!--                                 </volumes> -->
                                 <wait>
                                     <url>http://${docker.host.address}:${docker.port}/v1/user/1</url>
                                     <time>100000</time>
