@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
+	<description>Master Microservices with Java, Chapter 5</description>
 	<groupId>com.packtpub.mmj</groupId>
 	<artifactId>4801_chapter5</artifactId>
 	<version>PACKT-SNAPSHOT</version>
@@ -26,10 +26,23 @@
 		<module>booking-service</module>
 	</modules>
 
-	<!-- profiles> <profile> <id>docker</id> <properties> <spring.profiles.active>docker</spring.profiles.active> 
-		</properties> </profile> <profile> <id>dev</id> <activation> <activeByDefault>true</activeByDefault> 
-		</activation> <properties> <spring.profiles.active>dev</spring.profiles.active> 
-		</properties> </profile> </profiles -->
+	<profiles>
+		<profile>
+			<id>docker</id>
+			<properties>
+				<spring.profiles.active>docker</spring.profiles.active>
+			</properties>
+		</profile>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<spring.profiles.active>dev</spring.profiles.active>
+			</properties>
+		</profile>
+	</profiles>
 	<!-- Build step is required to include the spring boot artifacts in generated 
 		jars -->
 	<build>
@@ -51,8 +64,8 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
-<!-- 				<version>Brixton.SR1</version> -->
-				<version>Brixton.SR7</version>
+				<version>Brixton.SR1</version>
+				<!-- <version>Brixton.SR7</version> -->
 				<!-- <version>Camden.SR7</version> -->
 				<!-- <version>Dalston.SR1</version> -->
 				<type>pom</type>
@@ -69,6 +82,11 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
+		 <dependency>
+            <!-- Testing starter -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
 	</dependencies>
-	<description>Master Microservices with Java, Chapter 5</description>
+
 </project>

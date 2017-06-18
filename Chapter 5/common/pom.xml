@@ -19,4 +19,22 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+    <build>
+	<plugins>
+		<plugin>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-maven-plugin</artifactId>
+			<!-- Disable a Maven plugin defined in a parent POM for common libraries 
+				. Avoid -->
+			<configuration>
+				<skip>true</skip>
+			</configuration>
+			<executions>
+				<execution>
+					<phase>none</phase>
+				</execution>
+			</executions>
+		</plugin>
+	</plugins>
+</build>
 </project>
