@@ -19,11 +19,7 @@
             <groupId>com.packtpub.mmj</groupId>
             <artifactId>online-table-reservation-common</artifactId>
             <version>PACKT-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
-        </dependency>
+        </dependency>       
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-netflix-hystrix-stream</artifactId>
@@ -51,12 +47,7 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-oauth2</artifactId>
-        </dependency>
-        <dependency>
-            <!-- Testing starter -->
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-        </dependency>
+        </dependency>        
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
