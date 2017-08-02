@@ -1,33 +1,36 @@
 package com.packtpub.mmj.restsample.resources;
-
+ 
 import com.packtpub.mmj.restsample.RestSampleApp;
+ 
 import java.util.List;
 import java.util.Map;
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull; 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.TestRestTemplate;
-import org.springframework.boot.test.WebIntegrationTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.web.client.RestTemplate;
+import org.junit.runner.RunWith; 
+import org.springframework.boot.context.embedded.LocalServerPort; 
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate; 
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner; 
 
 /**
  *
  * @author sousharm
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = RestSampleApp.class)
-@WebIntegrationTest
+
+@RunWith(SpringJUnit4ClassRunner.class) 
+@SpringBootTest(classes = RestSampleApp.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) 
 /**
  *
  * @author Sourabh Sharma
  */
 public class CalculationControllerTest {
 
-    private final RestTemplate restTemplate = new TestRestTemplate();
+    private final TestRestTemplate restTemplate = new TestRestTemplate();
 
+    @LocalServerPort
+    private int port;
+    
     /**
      * Test the /calculation/sqrt API
      */
@@ -35,7 +38,7 @@ public class CalculationControllerTest {
     public void testSqrtApi() {
         //API call
         Map<String, Object> response
-                = restTemplate.getForObject("http://localhost:8080/calculation/sqrt/144", Map.class);
+                = restTemplate.getForObject("http://localhost:" + port + "/calculation/sqrt/144", Map.class);
 
         assertNotNull(response);
 
@@ -60,7 +63,7 @@ public class CalculationControllerTest {
     public void testSqrtApiError() {
         //API call
         Map<String, Object> response
-                = restTemplate.getForObject("http://localhost:8080/calculation/sqrt/144a", Map.class);
+                = restTemplate.getForObject("http://localhost:" + port + "/calculation/sqrt/144a", Map.class);
 
         assertNotNull(response);
 
@@ -86,7 +89,7 @@ public class CalculationControllerTest {
 
         //Invoking the API
         Map<String, Object> response
-                = restTemplate.getForObject("http://localhost:8080/calculation/power?base=2&exponent=4", Map.class);
+                = restTemplate.getForObject("http://localhost:" + port + "/calculation/power?base=2&exponent=4", Map.class);
 
         assertNotNull(response);
 
@@ -112,7 +115,7 @@ public class CalculationControllerTest {
 
         //Invoking the API
         Map<String, Object> response
-                = restTemplate.getForObject("http://localhost:8080/calculation/power?base=2a&exponent=4", Map.class);
+                = restTemplate.getForObject("http://localhost:" + port + "/calculation/power?base=2a&exponent=4", Map.class);
 
         assertNotNull(response);
 
