@@ -17,10 +17,10 @@
 	<parent>
 		<groupId>org.springframework.cloud</groupId>
 		<artifactId>spring-cloud-starter-parent</artifactId>
-		<version>Angel.SR6</version>
+		<!-- <version>Angel.SR6</version> -->
 		<!-- <version>Brixton.SR7</version> -->
 		<!-- <version>Camden.SR7</version> -->
-		<!-- <version>Dalston.SR1</version> -->
+		<version>Dalston.SR2</version>
 	</parent>
 
 	<modules>

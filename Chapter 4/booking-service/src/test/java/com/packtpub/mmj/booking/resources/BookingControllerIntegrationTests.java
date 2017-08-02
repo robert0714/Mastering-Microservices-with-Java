@@ -2,7 +2,8 @@ package com.packtpub.mmj.booking.resources;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.packtpub.mmj.booking.BookingApp;
+import com.packtpub.mmj.booking.BookingApp; 
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Collections;
@@ -12,34 +13,35 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.TestRestTemplate;
-import org.springframework.boot.test.WebIntegrationTest;
+import org.junit.runner.RunWith; 
+import org.springframework.boot.context.embedded.LocalServerPort; 
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner; 
 
 /**
  * Spring System test - by using @SpringApplicationConfiguration that picks up
  * same configuration that Spring Boot uses.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = BookingApp.class)
-@WebIntegrationTest
+@RunWith(SpringJUnit4ClassRunner.class) 
+@SpringBootTest(classes = BookingApp.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) 
 public class BookingControllerIntegrationTests {
 
-    private final RestTemplate restTemplate = new TestRestTemplate();
+    private final TestRestTemplate restTemplate = new TestRestTemplate();
     //Required to Generate JSON content from Java objects
+
+    /**
+     *
+     */
     public static final ObjectMapper objectMapper = new ObjectMapper();
 
-    @Value("${local.server.port}")
+    @LocalServerPort
     private int port;
 
     /**
