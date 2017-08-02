@@ -4,9 +4,19 @@ info:
 server:
     port: 8989
 
-management:
-    port: 8990
+spring:
+    application:
+        name: turbine-server    
+    cloud:
+        inetutils:
+            preferred-networks:
+              - 192.168.*.*
 
+management:
+  port: 8990
+  security:
+    enabled: false
+    
 turbine:
     aggregator:
         clusterConfig: USER-SERVICE,RESTAURANT-SERVICE
@@ -19,6 +29,7 @@ turbine:
 
 eureka:
     instance:
+        prefer-ip-address: true
         leaseRenewalIntervalInSeconds: 10
         metadataMap:
             instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${random.value}}}

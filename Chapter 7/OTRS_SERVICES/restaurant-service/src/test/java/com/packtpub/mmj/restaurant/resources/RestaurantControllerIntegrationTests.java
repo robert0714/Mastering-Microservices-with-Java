@@ -16,10 +16,9 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.TestRestTemplate;
-import org.springframework.boot.test.WebIntegrationTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.context.embedded.LocalServerPort;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -27,28 +26,25 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.web.client.RestTemplate;
-
 /**
  * Spring System test - by using @SpringApplicationConfiguration that picks up
  * same configuration that Spring Boot uses.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = RestaurantApp.class)
-@WebIntegrationTest("server.port=0")
+@RunWith(SpringJUnit4ClassRunner.class) 
+@SpringBootTest(classes = RestaurantApp.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) 
 public class RestaurantControllerIntegrationTests extends
         AbstractRestaurantControllerTests {
 
-    private final RestTemplate restTemplate = new TestRestTemplate();
+    private final TestRestTemplate restTemplate = new TestRestTemplate();
     //Required to Generate JSON content from Java objects
-
+    
+    @LocalServerPort
+    private int port;
     /**
      *
      */
     public static final ObjectMapper objectMapper = new ObjectMapper();
 
-    @Value("${local.server.port}")
-    int port;
 
     /**
      * Test the GET /v1/restaurants/{id} API
@@ -57,7 +53,8 @@ public class RestaurantControllerIntegrationTests extends
     public void testGetById() {
         //API call
         Map<String, Object> response
-                = restTemplate.getForObject("http://localhost:" + port + "/v1/restaurants/1", Map.class);
+                = restTemplate.getForObject("http://localhost:"
+                        + port +  "/v1/restaurants/1", Map.class);
 
         assertNotNull(response);
 
@@ -82,7 +79,8 @@ public class RestaurantControllerIntegrationTests extends
 
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<Object> entity = new HttpEntity<>(headers);
-        ResponseEntity<Map> responseE = restTemplate.exchange("http://localhost:" + port + "/v1/restaurants/99", HttpMethod.GET, entity, Map.class);
+        ResponseEntity<Map> responseE = restTemplate.exchange("http://localhost:"
+                + port + "/v1/restaurants/99", HttpMethod.GET, entity, Map.class);
 
         assertNotNull(responseE);
 
@@ -100,7 +98,8 @@ public class RestaurantControllerIntegrationTests extends
         HttpEntity<Object> entity = new HttpEntity<>(headers);
         Map<String, Object> uriVariables = new HashMap<>();
         uriVariables.put("name", "Meurice");
-        ResponseEntity<Map[]> responseE = restTemplate.exchange("http://localhost:" + port + "/v1/restaurants?name={name}", HttpMethod.GET, entity, Map[].class, uriVariables);
+        ResponseEntity<Map[]> responseE = restTemplate.exchange("http://localhost:"
+                + port +  "/v1/restaurants?name={name}", HttpMethod.GET, entity, Map[].class, uriVariables);
 
         assertNotNull(responseE);
 
@@ -157,8 +156,9 @@ public class RestaurantControllerIntegrationTests extends
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<>(objectMapper.writeValueAsString(requestBody), headers);
-
-        ResponseEntity<Map> responseE = restTemplate.exchange("http://localhost:" + port + "/v1/restaurants", HttpMethod.POST, entity, Map.class, Collections.EMPTY_MAP);
+         
+        ResponseEntity<Map> responseE = restTemplate.exchange("http://localhost:"
+                + port + "/v1/restaurants", HttpMethod.POST, entity, Map.class, Collections.EMPTY_MAP);
 
         assertNotNull(responseE);
 
@@ -167,7 +167,8 @@ public class RestaurantControllerIntegrationTests extends
 
         //validating the newly created restaurant using API call
         Map<String, Object> response
-                = restTemplate.getForObject("http://localhost:" + port + "/v1/restaurants/11", Map.class);
+                = restTemplate.getForObject("http://localhost:"
+                        + port +  "/v1/restaurants/11", Map.class);
 
         assertNotNull(response);
 

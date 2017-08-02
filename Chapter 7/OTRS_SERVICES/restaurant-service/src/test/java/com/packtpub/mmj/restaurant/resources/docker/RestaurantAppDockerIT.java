@@ -6,6 +6,7 @@ import java.net.URL;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.springframework.boot.context.embedded.LocalServerPort;
 
 /**
  *
@@ -21,7 +22,7 @@ public class RestaurantAppDockerIT {
     @Test
     public void testConnection() throws IOException {
         String baseUrl = System.getProperty("service.url");
-        URL serviceUrl = new URL(baseUrl + "v1/restaurants/1");
+        URL serviceUrl = new URL( "v1/restaurants/1");
         HttpURLConnection connection = (HttpURLConnection) serviceUrl.openConnection();
         int responseCode = connection.getResponseCode();
         assertEquals(200, responseCode);

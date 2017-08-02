@@ -4,6 +4,14 @@ info:
 spring:
   application:
      name: zuul-server  # Service registers under this name
+  cloud:
+    inetutils:
+      preferred-networks:
+        - 192.168.*.*
+
+management:
+  security:
+    enabled: false
 
 endpoints:
     restart:
@@ -55,6 +63,7 @@ hystrix:
 # Discovery Server Access
 eureka:
     instance:
+        prefer-ip-address: true
         leaseRenewalIntervalInSeconds: 5
         leaseExpirationDurationInSeconds: 5
         metadataMap:

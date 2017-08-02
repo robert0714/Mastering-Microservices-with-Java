@@ -6,6 +6,14 @@ spring:
     enabled: false           # Ignore Eureka dashboard FreeMarker templates
   thymeleaf:
     cache: false             # Allow Thymeleaf templates to be reloaded at runtime
+  cloud:
+     inetutils:
+        preferred-networks:
+          - 192.168.*.*
+          
+management:
+  security:
+    enabled: false
 
 # HTTP Server
 server:
@@ -14,6 +22,7 @@ server:
 # Discovery Server Access
 eureka:
     instance:
+        prefer-ip-address: true
         leaseRenewalIntervalInSeconds: 3
         leaseExpirationDurationInSeconds: 2
         metadataMap:

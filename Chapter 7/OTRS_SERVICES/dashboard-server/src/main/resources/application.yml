@@ -2,6 +2,10 @@
 spring:
     application:
         name: dashboard-server
+    cloud:
+        inetutils:
+            preferred-networks:
+              - 192.168.*.*
 
 endpoints:
     restart:
@@ -9,11 +13,16 @@ endpoints:
     shutdown:
         enabled: true
 
+management:
+  security:
+    enabled: false
+
 server:
     port: 7979
 
 eureka:
     instance:
+        prefer-ip-address: true
         leaseRenewalIntervalInSeconds: 3
         metadataMap:
             instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${random.value}}}
